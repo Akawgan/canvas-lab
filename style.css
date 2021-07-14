@@ -1,15 +1,13 @@
+* { margin:0; padding:0; } /* to remove the top and left whitespace */
+
 body
 {
     display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: black;
+    overflow: hidden;
 }
 canvas
 {
-    background-color: white;
+    background: rgb(255, 255, 255);
     display: block;
-    width: 500px;
-    height: 500px;
-    border: solid 2px black;
 }
