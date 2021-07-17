@@ -30,6 +30,7 @@ let dots = [];
       dots[i] = new Object();
       dots[i].posX = getRandomInt(0, window.innerWidth);
       dots[i].posY = getRandomInt(0, canvas.height);
+      dots[i].vector2 = [getRandomInt(-1, 2), getRandomInt(-1, 2)];
     }
   
     function drawDots() {
@@ -46,6 +47,15 @@ let dots = [];
         ctx.fillStyle = dotColor;
         ctx.fill();
         ctx.stroke();
+
+        if(dots[i].vector2[0] == 0 && dots[i].vector2[1] == 0)
+        {
+          dots[i].vector2 = [1, 1];
+        }
+
+        dots[i].posX += dots[i].vector2[0];
+        dots[i].posY += dots[i].vector2[1];
+
         }
       }
     }
