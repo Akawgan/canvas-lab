@@ -2,6 +2,9 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var x = 0;
 var y = 0;
+let dotColor = "#000000"
+let dotAmount = 100;
+let dots = [];
   
     // Event handler to resize the canvas when the document view is changed
     window.addEventListener('resize', resizeCanvas, false);
@@ -11,32 +14,40 @@ var y = 0;
       canvas.height = window.innerHeight;
   
       // Redraw everything after resizing the window
-      drawStuff(); 
+      drawDots(); 
     }
     resizeCanvas();
-  
-    function drawStuff() {
-      // Do drawing here
 
-      function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-      }
-
-        let vector2D = [getRandomInt(-1, 2), getRandomInt(-1, 2)]
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.beginPath();
-        ctx.strokeStyle = "#000000";
-        ctx.arc(canvas.width / 2 - 5 + x, canvas.height / 2 - 5 + y, 5, 0, 2 * Math.PI);
-        ctx.fillStyle = "#000000";
-        ctx.fill();
-        ctx.stroke();
-
-        x += vector2D[0];
-        y += vector2D[1];
-
-        
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    setInterval(drawStuff, 6);
+    // ------- Populate the canvas with the dot objects
+    for(i=0 ; i<dotAmount ; i++)
+    {
+      dots[i] = new Object();
+      dots[i].posX = getRandomInt(0, window.innerWidth);
+      dots[i].posY = getRandomInt(0, canvas.height);
+    }
+  
+    function drawDots() {
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Draw the dots
+      for(i=0 ; i<dotAmount ; i++)
+      {
+        if(dots[i] != undefined)
+        {
+        ctx.beginPath();
+        ctx.strokeStyle = dotColor;
+        ctx.arc(dots[i].posX, dots[i].posY, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = dotColor;
+        ctx.fill();
+        ctx.stroke();
+        }
+      }
+    }
+
+    setInterval(drawDots, 6);
