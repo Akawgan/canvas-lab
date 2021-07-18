@@ -19,9 +19,7 @@ let dots = [];
     resizeCanvas();
 
     function getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
+      return Math.random() * (max - min + 1) + min;
     }
 
     // ------- Populate the canvas with the dot objects
@@ -30,7 +28,7 @@ let dots = [];
       dots[i] = new Object();
       dots[i].posX = getRandomInt(0, window.innerWidth);
       dots[i].posY = getRandomInt(0, canvas.height);
-      dots[i].vector2 = [getRandomInt(-1, 2), getRandomInt(-1, 2)];
+      dots[i].vector2 = [getRandomInt(-1, 1), getRandomInt(-1, 1)];
     }
   
     function drawDots() {
@@ -43,7 +41,7 @@ let dots = [];
         {
         ctx.beginPath();
         ctx.strokeStyle = dotColor;
-        ctx.arc(dots[i].posX, dots[i].posY, 5, 0, 2 * Math.PI);
+        ctx.arc(dots[i].posX, dots[i].posY, 3, 0, 2 * Math.PI);
         ctx.fillStyle = dotColor;
         ctx.fill();
         ctx.stroke();
@@ -55,6 +53,15 @@ let dots = [];
 
         dots[i].posX += dots[i].vector2[0];
         dots[i].posY += dots[i].vector2[1];
+
+        if(dots[i].posX < 0 || dots[i].posX > canvas.width)
+        {
+          dots[i].vector2[0] *= -1;
+        }
+        if(dots[i].posY < 0 || dots[i].posY > canvas.height)
+        {
+          dots[i].vector2[1] *= -1;
+        }
 
         }
       }
