@@ -3,8 +3,11 @@ var ctx = canvas.getContext('2d');
 var x = 0;
 var y = 0;
 let dotColor = "#000000"
-let dotAmount = 150;
+let dotAmount = 300;
 let dots = [];
+let maxSpeed = .5;
+let minSize = 1;
+let maxSize = 5;
   
     // Event handler to resize the canvas when the document view is changed
     window.addEventListener('resize', resizeCanvas, false);
@@ -18,20 +21,22 @@ let dots = [];
     }
     resizeCanvas();
 
-    function getRandomInt(min, max) {
-      return Math.random() * (max - min + 1) + min;
+    function getRandomFloat(min, max) {
+      return Math.random() * (max - min) + min;
     }
 
     // ------- Populate the canvas with the dot objects
     for(i=0 ; i<dotAmount ; i++)
     {
       dots[i] = new Object();
-      dots[i].posX = getRandomInt(0, window.innerWidth);
-      dots[i].posY = getRandomInt(0, canvas.height);
-      dots[i].vector2 = [getRandomInt(-1, 1), getRandomInt(-1, 1)];
+      dots[i].posX = getRandomFloat(0, window.innerWidth);
+      dots[i].posY = getRandomFloat(0, canvas.height);
+      dots[i].vector2 = [getRandomFloat(-maxSpeed, maxSpeed), getRandomFloat(-maxSpeed, maxSpeed)];
       dots[i].color = dotColor;
+      dots[i].size = getRandomFloat(minSize, maxSize);
 
-      if(dots[i].vector2[0] + dots[i].vector2[1] < .1)
+      // Give slow dots a different color
+      if(dots[i].vector2[0] + dots[i].vector2[1] < .01)
       {
         dots[i].color = "#C9C9C9";
       }
@@ -47,7 +52,7 @@ let dots = [];
         {
         ctx.beginPath();
         ctx.strokeStyle = dots[i].color;
-        ctx.arc(dots[i].posX, dots[i].posY, 3, 0, 2 * Math.PI);
+        ctx.arc(dots[i].posX, dots[i].posY, dots[i].size, 0, 2 * Math.PI);
         ctx.fillStyle = dots[i].color;
         ctx.fill();
         ctx.stroke();
