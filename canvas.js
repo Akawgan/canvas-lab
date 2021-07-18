@@ -3,7 +3,7 @@ var ctx = canvas.getContext('2d');
 var x = 0;
 var y = 0;
 let dotColor = "#000000"
-let dotAmount = 100;
+let dotAmount = 150;
 let dots = [];
   
     // Event handler to resize the canvas when the document view is changed
@@ -29,6 +29,12 @@ let dots = [];
       dots[i].posX = getRandomInt(0, window.innerWidth);
       dots[i].posY = getRandomInt(0, canvas.height);
       dots[i].vector2 = [getRandomInt(-1, 1), getRandomInt(-1, 1)];
+      dots[i].color = dotColor;
+
+      if(dots[i].vector2[0] + dots[i].vector2[1] < .1)
+      {
+        dots[i].color = "#C9C9C9";
+      }
     }
   
     function drawDots() {
@@ -40,9 +46,9 @@ let dots = [];
         if(dots[i] != undefined)
         {
         ctx.beginPath();
-        ctx.strokeStyle = dotColor;
+        ctx.strokeStyle = dots[i].color;
         ctx.arc(dots[i].posX, dots[i].posY, 3, 0, 2 * Math.PI);
-        ctx.fillStyle = dotColor;
+        ctx.fillStyle = dots[i].color;
         ctx.fill();
         ctx.stroke();
 
