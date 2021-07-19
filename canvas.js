@@ -9,7 +9,7 @@ let dots = [];
 let maxSpeed = .5;
 let minSize = 1;
 let maxSize = 2;
-let minDistance = 100;
+let minDistance = 150;
   
     // Event handler to resize the canvas when the document view is changed
     window.addEventListener('resize', resizeCanvas, false);
