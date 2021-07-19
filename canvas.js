@@ -2,12 +2,14 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var x = 0;
 var y = 0;
-let dotColor = "#000000"
-let dotAmount = 140;
+let dotColor = "#808080";
+let lineColor = "#808080";
+let dotAmount = 180;
 let dots = [];
 let maxSpeed = .5;
 let minSize = 1;
-let maxSize = 5;
+let maxSize = 2;
+let minDistance = 100;
   
     // Event handler to resize the canvas when the document view is changed
     window.addEventListener('resize', resizeCanvas, false);
@@ -38,7 +40,32 @@ let maxSize = 5;
       // Give slow dots a different color
       if(dots[i].vector2[0] + dots[i].vector2[1] < .01)
       {
-        dots[i].color = "#C9C9C9";
+        dots[i].color = "#E9E9E9";
+      }
+    }
+
+    let checkDistance = function(x1, y1, x2, y2)
+    { 
+      return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    };
+
+    function drawLines(dot, neighbours)
+    {
+      for (let i = 0; i < neighbours.length; i++) 
+      {
+        let distance = checkDistance(dot.posX, dot.posY, neighbours[i].posX, neighbours[i].posY);
+        let opacity = 1 - distance / minDistance;
+
+        if(distance < minDistance)
+        {
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = `rgba(125, 125, 125, ${opacity})`;
+        ctx.beginPath();
+        ctx.moveTo(dot.posX, dot.posY);
+        ctx.lineTo(neighbours[i].posX, neighbours[i].posY);
+        ctx.closePath();
+        ctx.stroke();
+        }
       }
     }
   
@@ -74,8 +101,11 @@ let maxSize = 5;
           dots[i].vector2[1] *= -1;
         }
 
+        // Connect to other dots
+        drawLines(dots[i], dots);
+
         }
       }
     }
 
-    setInterval(drawDots, 6);
+    setInterval(drawDots, 10);
