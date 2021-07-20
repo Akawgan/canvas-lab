@@ -4,12 +4,12 @@ var x = 0;
 var y = 0;
 let dotColor = "#808080";
 let lineColor = "#808080";
-let dotAmount = 180;
+let dotAmount = 150;
 let dots = [];
 let maxSpeed = 1;
 let minSize = 1;
 let maxSize = 2;
-let minDistance = 150;
+let minDistance = 100;
   
     // Event handler to resize the canvas when the document view is changed
     window.addEventListener('resize', resizeCanvas, false);
