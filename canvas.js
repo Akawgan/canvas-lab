@@ -27,7 +27,7 @@ let minDistance = 100;
       return Math.random() * (max - min) + min;
     }
 
-    // ------- Populate the canvas with the dot objects
+    // ------- Populate the array with the dot objects
     for(i=0 ; i<dotAmount ; i++)
     {
       dots[i] = new Object();
@@ -106,6 +106,8 @@ let minDistance = 100;
 
         }
       }
+
+      window.requestAnimationFrame(drawDots);
     }
 
-    setInterval(drawDots, 10);
+    window.requestAnimationFrame(drawDots);
