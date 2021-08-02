@@ -5,7 +5,7 @@ var x = 0;
 var y = 0;
 let dotColor = "#808080";
 let lineColor = "#808080";
-let dotAmount = 70;
+let dotAmount = 40;
 let dots = [];
 let maxSpeed = .3;
 let minSize = .5;
@@ -93,11 +93,11 @@ let minDistance = 100;
         dots[i].posX += dots[i].vector2[0];
         dots[i].posY += dots[i].vector2[1];
 
-        if(dots[i].posX < 0 || dots[i].posX > canvas.width)
+        if(dots[i].posX < -20 || dots[i].posX > canvas.width+20)
         {
           dots[i].vector2[0] *= -1;
         }
-        if(dots[i].posY < 0 || dots[i].posY > canvas.height)
+        if(dots[i].posY < -20 || dots[i].posY > canvas.height+20)
         {
           dots[i].vector2[1] *= -1;
         }
