@@ -11,3 +11,11 @@ canvas
     background: rgb(255, 255, 255);
     display: block;
 }
+
+#container
+{
+    width: 600;
+    height: 200;
+    border: 1px solid #000000;
+    margin: 0 auto;
+}
