@@ -3,7 +3,7 @@
 body
 {
     display: flex;
-    background-color: black;
+    background-color: rgb(255, 255, 255);
     overflow: hidden;
 }
 canvas
@@ -16,6 +16,6 @@ canvas
 {
     width: 600;
     height: 200;
-    border: 1px solid #ff0000;
+    border: 1px solid #ffffff;
     margin: 0 auto;
 }

@@ -5,18 +5,18 @@ var x = 0;
 var y = 0;
 let dotColor = "#808080";
 let lineColor = "#808080";
-let dotAmount = 40;
+let dotAmount = 50;
 let dots = [];
 let maxSpeed = .3;
 let minSize = .5;
 let maxSize = 1;
-let minDistance = 100;
+let minDistance = 80;
   
     // Event handler to resize the canvas when the document view is changed
     window.addEventListener('resize', resizeCanvas, false);
   
     function resizeCanvas() {
-      canvas.width = 900;
+      canvas.width = window.innerWidth;
       canvas.height = 200;
   
       // Redraw everything after resizing the window
@@ -59,7 +59,7 @@ let minDistance = 100;
 
         if(distance < minDistance)
         {
-        ctx.lineWidth = 1;
+        ctx.lineWidth = .5;
         ctx.strokeStyle = `rgba(125, 125, 125, ${opacity})`;
         ctx.beginPath();
         ctx.moveTo(dot.posX, dot.posY);
